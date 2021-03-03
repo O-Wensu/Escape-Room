@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private int level = 1;
     public Text CodeText;
     private List<int> codeNum = new List<int>();
+    private List<int> ShowCode = new List<int>();
     private int randNum;
     private string line;
     public Text[] firstCode;
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Text[] thirdCode;
     public Text[] fourthCode;
     public Text LastText;
+    public GameObject[] dial;
+    public GameObject[] arrow;
     private int[] Pos = new int[4];
     private bool firstCheck = false;
     private bool secondCheck = false;
@@ -31,7 +34,18 @@ public class GameManager : MonoBehaviour
     public GameObject Key;
     public GameObject clearPanel;
     public GameObject redPanel;
+
     #endregion
+
+    public static GameManager instance;
+
+    void Awake()
+    {
+        if (GameManager.instance == null)
+        {
+            GameManager.instance = this;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,40 +66,42 @@ public class GameManager : MonoBehaviour
         {
             randNum = Random.Range(0, 99);
             codeNum.Add(randNum);
+            ShowCode.Add(randNum);
         }
-        line = string.Join(" ", codeNum.ToArray());
+        if(level==1)
+            ShowCode.RemoveRange(0, 2);
+        if(level==2)
+            ShowCode.RemoveRange(0, 1);
+        line = string.Join(" ", ShowCode.ToArray());
         CodeText.text = "암호 : " + line;
 
         if (level == 1)
         {
-            Lv1FirstTextPos();
-            Lv1SecondTextPos();
+            arrow[2].SetActive(true);
+            firstCheck = true;
+            secondCheck = true;
             Lv1ThirdTextPos();
-            Lv1and2FourthTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
         else if (level == 2)
         {
-            Lv2FirstTextPos();
+            firstCheck = true;
+            dial[1].SetActive(true);
+            arrow[1].SetActive(true);
             Lv2SecondTextPos();
-            Lv2ThirdTextPos();
-            Lv1and2FourthTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
         else if (level == 3)
         {
+            dial[0].SetActive(true);
+            arrow[0].SetActive(true);
             Lv3FirstTextPos();
-            Lv3SecondTextPos();
-            Lv3ThirdTextPos();
-            Lv3FourthTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
         else if (level == 4)
         {
+            arrow[0].SetActive(true);
             Lv4FirstTextPos();
-            Lv4SecondTextPos();
-            Lv4ThirdTextPos();
-            Lv4FourthTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
     }
@@ -95,9 +111,11 @@ public class GameManager : MonoBehaviour
         #region
         if (Pos[0] < 0)
             Pos[0] = Pos[0] + 26;
+
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
         #endregion
     }
+
     public void Lv2FirstTextPos()
     {
         Pos[0] = Random.Range(-6, 6);
@@ -140,6 +158,7 @@ public class GameManager : MonoBehaviour
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
+
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
     }
@@ -229,8 +248,8 @@ public class GameManager : MonoBehaviour
     {
         preValue = nowValue;
         nowValue = (float)slider.value;
-        //Debug.Log("preValue : " + preValue + "nowValue : " + nowValue);
         sliderValue.text = "" + (float)slider.value;
+
         if (nowValue - preValue > 0)
         {
             if (fourthCheck == false)   //네번째 정답 못맞춤
@@ -291,17 +310,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        /*if (nowValue - preValue > 0)
-        {
-            if (firstCheck == false)
-                firstMovePlus();
-        }
-        else if (nowValue - preValue < 0)
-        {
-            if (firstCheck == false)
-                firstMoveMinus();
-        }
-        */
+
     }
     public void CheckButton()
     {
@@ -328,6 +337,7 @@ public class GameManager : MonoBehaviour
     }
     public void firstMovePlus()
     {
+        SoundManager.instance.Tick();
         firstCode[Pos[0]].text = " ";
         (Pos[0])++;
         if (Pos[0] == 26)
@@ -336,6 +346,7 @@ public class GameManager : MonoBehaviour
     }
     public void firstMoveMinus()
     {
+        SoundManager.instance.Tick();
         firstCode[Pos[0]].text = " ";
         (Pos[0])--;
         if (Pos[0] < 0)
@@ -344,6 +355,7 @@ public class GameManager : MonoBehaviour
     }
     public void secondMovePlus()
     {
+        SoundManager.instance.Tick();
         secondCode[Pos[1]].text = " ";
         (Pos[1])++;
         if (Pos[1] == 22)
@@ -352,6 +364,7 @@ public class GameManager : MonoBehaviour
     }
     public void secondMoveMinus()
     {
+        SoundManager.instance.Tick();
         secondCode[Pos[1]].text = " ";
         (Pos[1])--;
         if (Pos[1] < 0)
@@ -360,6 +373,7 @@ public class GameManager : MonoBehaviour
     }
     public void thirdMovePlus()
     {
+        SoundManager.instance.Tick();
         thirdCode[Pos[2]].text = " ";
         (Pos[2])++;
         if (Pos[2] == 15)
@@ -368,6 +382,7 @@ public class GameManager : MonoBehaviour
     }
     public void thirdMoveMinus()
     {
+        SoundManager.instance.Tick();
         thirdCode[Pos[2]].text = " ";
         (Pos[2])--;
         if (Pos[2] < 0)
@@ -376,6 +391,7 @@ public class GameManager : MonoBehaviour
     }
     public void fourthMovePlus()
     {
+        SoundManager.instance.Tick();
         fourthCode[Pos[3]].text = " ";
         (Pos[3])++;
         if (Pos[3] == 8)
@@ -385,6 +401,7 @@ public class GameManager : MonoBehaviour
 
     public void fourthMoveMinus()
     {
+        SoundManager.instance.Tick();
         fourthCode[Pos[3]].text = " ";
         (Pos[3])--;
         if (Pos[3] < 0)
@@ -403,6 +420,17 @@ public class GameManager : MonoBehaviour
             firstCheck = true;
             Debug.Log("첫 번째 정답");
             SoundManager.instance.Success();
+            arrow[0].SetActive(false);
+            arrow[1].SetActive(true);
+            if (level == 1)
+                Lv1SecondTextPos();
+            else if (level == 2)
+                Lv2SecondTextPos();
+            else if(level==3)
+                Lv3SecondTextPos();
+            else if (level == 4)
+                Lv4SecondTextPos();
+            slider.value = 50;
         }
         if (NowNum != codeNum[0])
         {
@@ -410,7 +438,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("첫 번째 틀림");
             redPanel.SetActive(true);
             SoundManager.instance.Cave();
-            Invoke("del_red", 2);
+            Invoke("del_red", 1.5f);
         }
     }
     public void CheckSecond()
@@ -423,6 +451,18 @@ public class GameManager : MonoBehaviour
             secondCheck = true;
             Debug.Log("두 번째 정답");
             SoundManager.instance.Success();
+            arrow[1].SetActive(false);
+            arrow[2].SetActive(true);
+            if (level == 1)
+                Lv1ThirdTextPos();
+            else if (level == 2)
+                Lv2ThirdTextPos();          
+            else if (level == 3)
+                Lv3ThirdTextPos();          
+            else if (level == 4)
+                Lv4ThirdTextPos();        
+            slider.value = 50;
+
         }
         if (NowNum2 != codeNum[1])
         {
@@ -430,7 +470,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("두 번째 틀림");
             redPanel.SetActive(true);
             SoundManager.instance.Cave();
-            Invoke("del_red", 2);
+            Invoke("del_red", 1.5f);
         }
     }
     public void CheckThird()
@@ -443,6 +483,17 @@ public class GameManager : MonoBehaviour
             thirdCheck = true;
             Debug.Log("세 번째 정답");
             SoundManager.instance.Success();
+            arrow[2].SetActive(false);
+            arrow[3].SetActive(true) ;
+            if(level==1)
+                Lv1and2FourthTextPos();
+            else if(level==2)
+                Lv1and2FourthTextPos();
+            else if (level == 3)
+                Lv3FourthTextPos();
+            else if (level == 4)
+                Lv4FourthTextPos();
+            slider.value = 50;
         }
         if (NowNum3 != codeNum[2])
         {
@@ -450,7 +501,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("세 번째 틀림");
             redPanel.SetActive(true);
             SoundManager.instance.Cave();
-            Invoke("del_red", 2);
+            Invoke("del_red", 1.5f);
         }
     }
     public void CheckFourth()
@@ -463,6 +514,7 @@ public class GameManager : MonoBehaviour
             fourthCheck = true;
             Debug.Log("네 번째 정답");
             SoundManager.instance.OpenDoor();
+            slider.value = 50;
         }
         if (NowNum4 != codeNum[3])
         {
@@ -470,7 +522,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("네 번째 틀림");
             redPanel.SetActive(true);
             SoundManager.instance.Cave();
-            Invoke("del_red", 2);
+            Invoke("del_red", 1.5f);
         }
     }
     public void GameSuccess()
@@ -486,9 +538,11 @@ public class GameManager : MonoBehaviour
             }
             if (level == 4)
             {
-                clearPanel.SetActive(true);
-                UIManager.instance.endTime();
+                scene[4].SetActive(true);
+                Time.timeScale = 1f;
+                Invoke("ending", 1.5f);
             }
+
             Clear();
         }
 
@@ -516,36 +570,51 @@ public class GameManager : MonoBehaviour
             fourthCode[i].text = " ";
         }
 
+        codeNum.Clear();
+        ShowCode.Clear();
+
         firstCheck = false;
         secondCheck = false;
         thirdCheck = false;
         fourthCheck = false;
+
+        for(int i=0; i<4; i++)
+        {
+            arrow[i].SetActive(false);
+        }
+
         level++;
+        UIManager.instance.setZero();
+    }
+    public void ending()
+    {
+        //SceneChangeManager.instance.Result();
+        clearPanel.SetActive(true);
+        UIManager.instance.endTime();
+        UIManager.instance.EndScore();
     }
 
     public void dialbuttonClick()
     {
+        SoundManager.instance.Tick();
         if (level == 1)
-        {
             scene[0].SetActive(false);
-        }
+        
         if (level == 2)
-        {
             scene[1].SetActive(false);
-        }
+        
         if (level == 3)
-        {
             scene[2].SetActive(false);
-        }
+        
         if (level == 4)
-        {
             scene[3].SetActive(false);
-        }
+        
         GamePlay();
     }
 
     public void nextButton()
     {
+        SoundManager.instance.menu_Click();
         resultPanel.SetActive(false);
 
         if (level == 2)
@@ -564,8 +633,13 @@ public class GameManager : MonoBehaviour
             scene[3].SetActive(true);
         }
         else
+        {
+            Key.SetActive(false);
             Debug.Log("탈출 성공!");
+        }
+
     }
+
     public void Ending()
     {
         clearPanel.SetActive(true);

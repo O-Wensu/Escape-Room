@@ -22,14 +22,21 @@ public class SceneChangeManager : MonoBehaviour
 
     public void GameStart() 
     {
-        SoundManager.instance.menu_Door();
+        SoundManager.instance.menu_Click();
         SceneManager.LoadScene(2);
     }
 
     public void Tutorial() 
     {
-        SoundManager.instance.menu_Door();
+        SoundManager.instance.menu_Click();
         SceneManager.LoadScene(1);
     }
-
+    public void GameQuit()
+    {
+        Application.Quit();
+    }
+    public void Result()
+    {
+        SceneManager.LoadScene(3);
+    }
 }

@@ -16,35 +16,43 @@ public class tutorialManager : MonoBehaviour
     public Text[] thirdCode;
     public Text[] fourthCode;
     public Text LastText;
-    private int[] Pos= new int[4];
+    public GameObject[] explains;
+    private int[] Pos = new int[4];
     public Slider slider;
     public Text sliderValue;
-    private bool firstCheck=false;
-    private bool secondCheck=false;
-    private bool thirdCheck=false;
-    private bool fourthCheck=false;
+    private float preValue = 50f;
+    private float nowValue = 50f;
+    private bool firstCheck = false;
+    private bool secondCheck = false;
+    private bool thirdCheck = false;
+    private bool fourthCheck = false;
     public GameObject resultPanel;
     public GameObject retryPanel;
     public GameObject explainPanel;
+    public GameObject whitePanel;
+    private int i = 0;
+    public GameObject _key;
+    public GameObject[] Arrow;
+    public GameObject tutoScene;
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
-        Time.timeScale = 1.0f;
-        //Invoke("DestroyExplain", 1);
-        StartCoroutine("DestroyExplain");
-        for (int i=0; i < 5; i++)
+        Time.timeScale = 0f;
+
+        //StartCoroutine("DestroyExplain");
+        for (int i = 0; i < 5; i++)
         {
             randNum = Random.Range(0, 99);
             codeNum.Add(randNum);
         }
         line = string.Join(" ", codeNum.ToArray());
-        CodeText.text = "암호 : "+ line;
+        CodeText.text = "암호 : " + line;
         FirstTextPos();
-        SecondTextPos();
-        ThirdTextPos();
-        FourthTextPos();
+        //SecondTextPos();
+        //ThirdTextPos();
+        //FourthTextPos();
         LastText.text = "" + (int)codeNum[4];
     }
 
@@ -53,21 +61,21 @@ public class tutorialManager : MonoBehaviour
         suc_scene();
     }
 
-    IEnumerator DestroyExplain()
+    /*IEnumerator DestroyExplain()
     {
         yield return new WaitForSeconds(2.0f);
         explainPanel.SetActive(false);
-    }
- 
+    }*/
+
     public void FirstTextPos()
     {
         Pos[0] = Random.Range(0, 4);
-        firstCode[Pos[0]].text = ""+(int)codeNum[0];
+        firstCode[Pos[0]].text = "" + (int)codeNum[0];
     }
-    
+
     public void SecondTextPos()
     {
-        Pos[1]= Random.Range(0, 3);
+        Pos[1] = Random.Range(0, 3);
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
     }
 
@@ -84,8 +92,10 @@ public class tutorialManager : MonoBehaviour
 
     public void MoveSlider()
     {
-        sliderValue.text = ""+(float)slider.value;
-        if ((50 <= slider.value) && (slider.value <= 100))
+        preValue = nowValue;
+        nowValue = (float)slider.value;
+        sliderValue.text = "" + (float)slider.value;
+        if (nowValue - preValue > 0) //(50 <= slider.value) && (slider.value <= 100)
         {
             if (fourthCheck == false)   //네번째 정답 못맞춤
             {
@@ -114,10 +124,10 @@ public class tutorialManager : MonoBehaviour
                     fourthMovePlus();
                 }
             }
-                
+
         }
 
-        else if ((0 <= slider.value) && (slider.value <= 50))
+        else if (nowValue - preValue < 0)//(0 <= slider.value) && (slider.value <= 50)
         {
             if (fourthCheck == false)   //네번째 정답 못맞춤
             {
@@ -153,6 +163,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[0] < 4)
         {
+            SoundManager.instance.Tick();
             firstCode[Pos[0]].text = " ";
             (Pos[0])++;
             firstCode[Pos[0]].text = "" + (int)codeNum[0];
@@ -162,12 +173,14 @@ public class tutorialManager : MonoBehaviour
         {
             firstCode[Pos[0]].text = "" + (int)codeNum[0];
         }
+
     }
 
     public void firstMoveMinus()
     {
         if (Pos[0] > 0)
         {
+            SoundManager.instance.Tick();
             firstCode[Pos[0]].text = " ";
             (Pos[0])--;
             firstCode[Pos[0]].text = "" + (int)codeNum[0];
@@ -183,6 +196,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[1] < 4)
         {
+            SoundManager.instance.Tick();
             secondCode[Pos[1]].text = " ";
             (Pos[1])++;
             secondCode[Pos[1]].text = "" + (int)codeNum[1];
@@ -198,6 +212,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[1] > 0)
         {
+            SoundManager.instance.Tick();
             secondCode[Pos[1]].text = " ";
             (Pos[1])--;
             secondCode[Pos[1]].text = "" + (int)codeNum[1];
@@ -213,6 +228,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[2] < 2)
         {
+            SoundManager.instance.Tick();
             thirdCode[Pos[2]].text = " ";
             (Pos[2])++;
             thirdCode[Pos[2]].text = "" + (int)codeNum[2];
@@ -228,6 +244,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[2] > 0)
         {
+            SoundManager.instance.Tick();
             thirdCode[Pos[2]].text = " ";
             (Pos[2])--;
             thirdCode[Pos[2]].text = "" + (int)codeNum[2];
@@ -243,6 +260,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[3] < 2)
         {
+            SoundManager.instance.Tick();
             fourthCode[Pos[3]].text = " ";
             (Pos[3])++;
             fourthCode[Pos[3]].text = "" + (int)codeNum[3];
@@ -258,6 +276,7 @@ public class tutorialManager : MonoBehaviour
     {
         if (Pos[3] > 0)
         {
+            SoundManager.instance.Tick();
             fourthCode[Pos[3]].text = " ";
             (Pos[3])--;
             fourthCode[Pos[3]].text = "" + (int)codeNum[3];
@@ -290,7 +309,7 @@ public class tutorialManager : MonoBehaviour
             else
                 CheckFourth();
         }
-        
+
     }
 
     public void CheckFirst()
@@ -303,6 +322,10 @@ public class tutorialManager : MonoBehaviour
             firstCheck = true;
             Debug.Log("첫 번째 정답");
             SoundManager.instance.Success();
+            SecondTextPos();
+            Arrow[0].SetActive(false);
+            Arrow[1].SetActive(true);
+            slider.value = 50;
         }
         if (NowNum != codeNum[0])
         {
@@ -324,6 +347,10 @@ public class tutorialManager : MonoBehaviour
             secondCheck = true;
             Debug.Log("두 번째 정답");
             SoundManager.instance.Success();
+            ThirdTextPos();
+            Arrow[1].SetActive(false);
+            Arrow[2].SetActive(true);
+            slider.value = 50;
         }
         if (NowNum2 != codeNum[1])
         {
@@ -345,6 +372,10 @@ public class tutorialManager : MonoBehaviour
             thirdCheck = true;
             Debug.Log("세 번째 정답");
             SoundManager.instance.Success();
+            FourthTextPos();
+            Arrow[2].SetActive(false);
+            Arrow[3].SetActive(true);
+            slider.value = 50;
         }
         if (NowNum3 != codeNum[2])
         {
@@ -366,6 +397,7 @@ public class tutorialManager : MonoBehaviour
             fourthCheck = true;
             Debug.Log("네 번째 정답");
             SoundManager.instance.OpenDoor();
+            slider.value = 50;
         }
         if (NowNum4 != codeNum[3])
         {
@@ -373,7 +405,7 @@ public class tutorialManager : MonoBehaviour
             Debug.Log("네 번째 틀림");
             retryPanel.SetActive(true);
             SoundManager.instance.Cave();
-            Invoke("DestroyTry", 2);
+            Invoke("DestroyTry", 1f);
         }
     }
 
@@ -384,6 +416,7 @@ public class tutorialManager : MonoBehaviour
             Time.timeScale = 0f;
             resultPanel.SetActive(true);
             UIManager.instance.printTime();
+
         }
 
     }
@@ -393,6 +426,60 @@ public class tutorialManager : MonoBehaviour
         retryPanel.SetActive(false);
     }
 
+    public void nextExplain()
+    {
+        if (i == 0)
+        {
+            explains[i].SetActive(false);
+            i++; //i=1
+            explains[i].SetActive(true);
+        }
+        else if (i == 1)
+        {
+            explains[i].SetActive(false);
+            i++; //i=2
+            _key.SetActive(true);
+            explains[i].SetActive(true);
+        }
+        else if (i == 2)
+        {
+            explains[i].SetActive(false);
+        }
+        else if (i==3)
+        {
+            explains[i - 1].SetActive(false);
+            explains[i].SetActive(true);
+            i++;
+        }
+        else if (i == 4)
+        {
+            explains[i - 1].SetActive(false);
+            explains[i].SetActive(true);
+        }
+        else
+            for (int i = 0; i < 5; i++)
+            {
+                explains[i].SetActive(false);
+            }
+    }
+    public void stopCount()
+    {
+        if (i == 2)
+            i = 3;
+        else
+            i = -1;
+    }
+    public void Des_explain()
+    {
+        for(int i=0; i<5; i++)
+        {
+            explains[i].SetActive(false);
+        }
+        whitePanel.SetActive(false);
+    }
 
-
+    public void del_tuto()
+    {
+        tutoScene.SetActive(false);
+    }
 }
