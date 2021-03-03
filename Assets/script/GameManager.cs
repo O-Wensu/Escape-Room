@@ -107,7 +107,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv1FirstTextPos()
     {
-        Pos[0] = Random.Range(-3, 3);
+        while (true)
+        {
+            Pos[0] = Random.Range(-3, 3);
+            if (Pos[0] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[0] < 0)
             Pos[0] = Pos[0] + 26;
@@ -118,7 +124,13 @@ public class GameManager : MonoBehaviour
 
     public void Lv2FirstTextPos()
     {
-        Pos[0] = Random.Range(-6, 6);
+        while (true)
+        {
+            Pos[0] = Random.Range(-6, 6);
+            if (Pos[0] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[0] < 0)
             Pos[0] = Pos[0] + 26;
@@ -127,7 +139,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv3FirstTextPos()
     {
-        Pos[0] = Random.Range(-9, 9);
+        while (true)
+        {
+            Pos[0] = Random.Range(-9, 9);
+            if (Pos[0] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[0] < 0)
             Pos[0] = Pos[0] + 26;
@@ -136,7 +154,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv4FirstTextPos()
     {
-        Pos[0] = Random.Range(-26, 26);
+        while (true)
+        {
+            Pos[0] = Random.Range(-26, 26);
+            if ((Pos[0] != 0)||(Pos[0] != -26))
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[0] < 0)
             Pos[0] = Pos[0] + 26;
@@ -145,7 +169,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv1SecondTextPos()
     {
-        Pos[1] = Random.Range(-3, 3);
+        while (true)
+        {
+            Pos[1] = Random.Range(-3, 3);
+            if (Pos[1] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
@@ -154,7 +184,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv2SecondTextPos()
     {
-        Pos[1] = Random.Range(-5, 5);
+        while (true)
+        {
+            Pos[1] = Random.Range(-5, 5);
+            if (Pos[1] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
@@ -164,7 +200,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv3SecondTextPos()
     {
-        Pos[1] = Random.Range(-8, 8);
+        while (true)
+        {
+            Pos[1] = Random.Range(-8, 8);
+            if (Pos[1] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
@@ -173,7 +215,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv4SecondTextPos()
     {
-        Pos[1] = Random.Range(-22, 22);
+        while (true)
+        {
+            Pos[1] = Random.Range(-22, 22);
+            if ((Pos[1] != 0)||(Pos[1] != -22))
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
@@ -182,7 +230,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv1ThirdTextPos()
     {
-        Pos[2] = Random.Range(-2, 2);
+        while (true)
+        {
+            Pos[2] = Random.Range(-2, 2);
+            if (Pos[2] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[2] < 0)
             Pos[2] = Pos[2] + 15;
@@ -191,7 +245,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv2ThirdTextPos()
     {
-        Pos[2] = Random.Range(-3, 3);
+        while (true)
+        {
+            Pos[2] = Random.Range(-3, 3);
+            if (Pos[2] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[2] < 0)
             Pos[2] = Pos[2] + 15;
@@ -200,7 +260,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv3ThirdTextPos()
     {
-        Pos[2] = Random.Range(-5, 5);
+        while (true)
+        {
+            Pos[2] = Random.Range(-5, 5);
+            if (Pos[2] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[2] < 0)
             Pos[2] = Pos[2] + 15;
@@ -209,7 +275,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv4ThirdTextPos()
     {
-        Pos[2] = Random.Range(-15, 15);
+        while (true)
+        {
+            Pos[2] = Random.Range(-15, 15);
+            if ((Pos[2] != 0)||(Pos[2] != -15))
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[2] < 0)
             Pos[2] = Pos[2] + 15;
@@ -218,7 +290,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv1and2FourthTextPos()
     {
-        Pos[3] = Random.Range(-1, 1);
+        while (true)
+        {
+            Pos[3] = Random.Range(-1, 1);
+            if (Pos[3] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[3] < 0)
             Pos[3] = Pos[3] + 8;
@@ -227,7 +305,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv3FourthTextPos()
     {
-        Pos[3] = Random.Range(-2, 2);
+        while (true)
+        {
+            Pos[3] = Random.Range(-2, 2);
+            if (Pos[3] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[3] < 0)
             Pos[3] = Pos[3] + 8;
@@ -236,7 +320,13 @@ public class GameManager : MonoBehaviour
     }
     public void Lv4FourthTextPos()
     {
-        Pos[3] = Random.Range(-8, 8);
+        while (true)
+        {
+            Pos[3] = Random.Range(-8, 8);
+            if ((Pos[3] != 0)||(Pos[3] != -8))
+                Debug.Log("0이었음");
+            break;
+        }
         #region
         if (Pos[3] < 0)
             Pos[3] = Pos[3] + 8;
@@ -588,7 +678,6 @@ public class GameManager : MonoBehaviour
     }
     public void ending()
     {
-        //SceneChangeManager.instance.Result();
         clearPanel.SetActive(true);
         UIManager.instance.endTime();
         UIManager.instance.EndScore();

@@ -69,24 +69,49 @@ public class tutorialManager : MonoBehaviour
 
     public void FirstTextPos()
     {
-        Pos[0] = Random.Range(0, 4);
+        while (true)
+        {
+            Pos[0] = Random.Range(0, 4);
+            if (Pos[0] != 0)
+                Debug.Log("0이었음");
+                break;
+        }
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
     }
 
     public void SecondTextPos()
     {
-        Pos[1] = Random.Range(0, 3);
+        while (true)
+        {
+            Pos[1] = Random.Range(0, 3);
+            if (Pos[1] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
+
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
     }
 
     public void ThirdTextPos()
     {
-        Pos[2] = Random.Range(0, 2);
+        while (true)
+        {
+            Pos[2] = Random.Range(0, 2);
+            if (Pos[2] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
     }
     public void FourthTextPos()
     {
-        Pos[3] = Random.Range(0, 1);
+        while (true)
+        {
+            Pos[3] = Random.Range(0, 1);
+            if (Pos[3] != 0)
+                Debug.Log("0이었음");
+            break;
+        }
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
     }
 
