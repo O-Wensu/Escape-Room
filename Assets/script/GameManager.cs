@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     public GameObject Key;
     public GameObject clearPanel;
     public GameObject redPanel;
+    private int plusN;
 
     #endregion
 
@@ -50,8 +52,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UIManager.instance.setZero();
         Time.timeScale = 0f;
+        UIManager.instance.setZero();
     }
     void Update()
     {
@@ -110,14 +112,17 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[0] = Random.Range(-3, 3);
-            if (Pos[0] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[0] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[0] < 0)
             Pos[0] = Pos[0] + 26;
-
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
         #endregion
     }
@@ -127,9 +132,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[0] = Random.Range(-6, 6);
-            if (Pos[0] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[0] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[0] < 0)
@@ -142,9 +151,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[0] = Random.Range(-9, 9);
-            if (Pos[0] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[0] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[0] < 0)
@@ -156,10 +169,14 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            Pos[0] = Random.Range(-26, 26);
-            if ((Pos[0] != 0)||(Pos[0] != -26))
-                Debug.Log("0이었음");
-            break;
+            Pos[0] = Random.Range(-25, 25);
+            if (Pos[0] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[0] < 0)
@@ -167,34 +184,42 @@ public class GameManager : MonoBehaviour
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
         #endregion
     }
+    /*
     public void Lv1SecondTextPos()
     {
         while (true)
         {
             Pos[1] = Random.Range(-3, 3);
-            if (Pos[1] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[1] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
-    }
+    }*/
     public void Lv2SecondTextPos()
     {
         while (true)
         {
             Pos[1] = Random.Range(-5, 5);
-            if (Pos[1] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[1] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[1] < 0)
             Pos[1] = Pos[1] + 22;
-
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
     }
@@ -203,9 +228,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[1] = Random.Range(-8, 8);
-            if (Pos[1] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[1] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[1] < 0)
@@ -217,10 +246,14 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            Pos[1] = Random.Range(-22, 22);
-            if ((Pos[1] != 0)||(Pos[1] != -22))
-                Debug.Log("0이었음");
-            break;
+            Pos[1] = Random.Range(-21, 21);
+            if (Pos[1] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[1] < 0)
@@ -233,9 +266,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[2] = Random.Range(-2, 2);
-            if (Pos[2] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[2] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[2] < 0)
@@ -248,9 +285,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[2] = Random.Range(-3, 3);
-            if (Pos[2] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[2] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[2] < 0)
@@ -263,9 +304,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[2] = Random.Range(-5, 5);
-            if (Pos[2] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[2] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[2] < 0)
@@ -277,10 +322,14 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            Pos[2] = Random.Range(-15, 15);
-            if ((Pos[2] != 0)||(Pos[2] != -15))
-                Debug.Log("0이었음");
-            break;
+            Pos[2] = Random.Range(-14, 14);
+            if (Pos[2] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[2] < 0)
@@ -293,11 +342,16 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[3] = Random.Range(-1, 1);
-            if (Pos[3] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[3] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
+
         if (Pos[3] < 0)
             Pos[3] = Pos[3] + 8;
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
@@ -308,9 +362,13 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             Pos[3] = Random.Range(-2, 2);
-            if (Pos[3] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[3] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[3] < 0)
@@ -322,10 +380,14 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
-            Pos[3] = Random.Range(-8, 8);
-            if ((Pos[3] != 0)||(Pos[3] != -8))
-                Debug.Log("0이었음");
-            break;
+            Pos[3] = Random.Range(-7, 7);
+            if (Pos[3] == 0)
+            {
+                Debug.Log("0 다시 돌림");
+                continue;
+            }
+            else
+                break;
         }
         #region
         if (Pos[3] < 0)
@@ -512,9 +574,7 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.Success();
             arrow[0].SetActive(false);
             arrow[1].SetActive(true);
-            if (level == 1)
-                Lv1SecondTextPos();
-            else if (level == 2)
+            if (level == 2)
                 Lv2SecondTextPos();
             else if(level==3)
                 Lv3SecondTextPos();

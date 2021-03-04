@@ -50,9 +50,7 @@ public class tutorialManager : MonoBehaviour
         line = string.Join(" ", codeNum.ToArray());
         CodeText.text = "암호 : " + line;
         FirstTextPos();
-        //SecondTextPos();
-        //ThirdTextPos();
-        //FourthTextPos();
+
         LastText.text = "" + (int)codeNum[4];
     }
 
@@ -72,10 +70,11 @@ public class tutorialManager : MonoBehaviour
         while (true)
         {
             Pos[0] = Random.Range(0, 4);
-            if (Pos[0] != 0)
-                Debug.Log("0이었음");
+            if (Pos[0] != 2)
                 break;
+            
         }
+        Debug.Log(Pos[0] + "번자리");
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
     }
 
@@ -83,12 +82,12 @@ public class tutorialManager : MonoBehaviour
     {
         while (true)
         {
-            Pos[1] = Random.Range(0, 3);
-            if (Pos[1] != 0)
-                Debug.Log("0이었음");
-            break;
+            Pos[1] = Random.Range(0, 4);
+            if (Pos[1] != 3)
+                break;
+            
         }
-
+        Debug.Log(Pos[1]+"번자리");
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
     }
 
@@ -97,21 +96,23 @@ public class tutorialManager : MonoBehaviour
         while (true)
         {
             Pos[2] = Random.Range(0, 2);
-            if (Pos[2] != 0)
-                Debug.Log("0이었음");
-            break;
+            if (Pos[2] != 2)
+                break;
+            
         }
+        Debug.Log(Pos[2] + "번자리");
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
     }
     public void FourthTextPos()
     {
         while (true)
         {
-            Pos[3] = Random.Range(0, 1);
-            if (Pos[3] != 0)
-                Debug.Log("0이었음");
-            break;
+            Pos[3] = Random.Range(0, 2);
+            if (Pos[3] != 1)
+                break;
+            
         }
+        Debug.Log(Pos[3] + "번자리");
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
     }
 

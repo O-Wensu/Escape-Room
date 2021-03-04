@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ public class UIManager : MonoBehaviour
     }
     void Start()
     {
-        startTime = Time.time;
+        startTime = 0f;
     }
     void Update()
     {
@@ -72,7 +73,7 @@ public class UIManager : MonoBehaviour
                 gameScore += 50;
             if (GameTime > 15)
                 gameScore += 30;
-        }
+        }     
         scoreText.text = "점수 : " + gameScore + "점";
     }
 
@@ -84,7 +85,20 @@ public class UIManager : MonoBehaviour
 
     public void EndScore()
     {
+        if (total <= 20)
+            gameScore += 100;
+        if ((total > 20) && (total <=25))
+            gameScore += 50;
+        if (total > 25)
+            gameScore += 30;
         endScore.text = "점수 : " + gameScore+"점";
+
+        float playtime_REAL = (float)(Math.Truncate(total * 100) / 100);
+        string sql = string.Format("Insert into Game(date, userID, gameID, gamePlayTime, gameScore) " +
+                                                   "VALUES( {0}, {1}, {2}, {3}, {4})",
+                                                   sqlite.Instance.date, sqlite.Instance.userID, sqlite.Instance.gameID, playtime_REAL, gameScore);
+        Debug.Log("sqlite.Instance.date : " + sqlite.Instance.date);
+        sqlite.Instance.DatabaseSQLAdd(sql);
     }
 
     public void setZero()
