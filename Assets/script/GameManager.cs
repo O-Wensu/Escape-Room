@@ -728,8 +728,9 @@ public class GameManager : MonoBehaviour
     {
         clearPanel.SetActive(true);
         UIManager.instance.endTime();
-        UIManager.instance.EndScore();
         Fill_();
+        UIManager.instance.EndScore();
+        
     }
 
     public void dialbuttonClick()
