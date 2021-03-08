@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     #region
+    private int startLv ;
     private int level = 1;
     public Text CodeText;
     private List<int> codeNum = new List<int>();
@@ -36,7 +37,13 @@ public class GameManager : MonoBehaviour
     public GameObject clearPanel;
     public GameObject redPanel;
     private int plusN;
-
+    public GameObject chose_level;
+    public float SliderMinValue;
+    public float SliderMaxValue;
+    int count;
+    int angle;
+    public GameObject origin;
+    public float num1;
     #endregion
 
     public static GameManager instance;
@@ -47,6 +54,10 @@ public class GameManager : MonoBehaviour
         {
             GameManager.instance = this;
         }
+        Slider_minmax();
+        angle = 12;
+        SliderMinValue = 180;
+        SliderMaxValue = 180;
     }
 
     // Start is called before the first frame update
@@ -58,6 +69,8 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         GameSuccess();
+        Slider_minmax();
+
     }
     public void GamePlay()
     {
@@ -82,7 +95,15 @@ public class GameManager : MonoBehaviour
             arrow[2].SetActive(true);
             firstCheck = true;
             secondCheck = true;
-            Lv1ThirdTextPos();
+            Debug.Log("난이도 : "+startLv);
+            if (startLv == 1)
+                Lv1ThirdTextPos();
+            else if (startLv == 2)
+                Lv2ThirdTextPos();
+            else if (startLv == 3)
+                Lv3ThirdTextPos();
+            else if (startLv == 4)
+                Lv4ThirdTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
         else if (level == 2)
@@ -90,25 +111,47 @@ public class GameManager : MonoBehaviour
             firstCheck = true;
             dial[1].SetActive(true);
             arrow[1].SetActive(true);
-            Lv2SecondTextPos();
+            if (startLv == 1)
+                Lv1SecondTextPos();
+            else if (startLv == 2)
+                Lv2SecondTextPos();
+            else if (startLv == 3)
+                Lv3SecondTextPos();
+            else if (startLv == 4)
+                Lv4SecondTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
         else if (level == 3)
         {
             dial[0].SetActive(true);
             arrow[0].SetActive(true);
-            Lv3FirstTextPos();
+            if (startLv == 1)
+                Lv1FirstTextPos();
+            else if (startLv == 2)
+                Lv2FirstTextPos(); 
+            else if (startLv == 3)
+                Lv3FirstTextPos();
+            else if (startLv == 4)
+                Lv4FirstTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
         else if (level == 4)
         {
             arrow[0].SetActive(true);
-            Lv4FirstTextPos();
+            if (startLv == 1)
+                Lv1FirstTextPos();
+            else if (startLv == 2)
+                Lv2FirstTextPos();
+            else if (startLv == 3)
+                Lv3FirstTextPos();
+            else if (startLv == 4)
+                Lv4FirstTextPos();
             LastText.text = "" + (int)codeNum[4];
         }
     }
-    public void Lv1FirstTextPos()
+    private void Lv1FirstTextPos()
     {
+        Debug.Log("Lv1FirstTextPos");
         while (true)
         {
             Pos[0] = Random.Range(-3, 3);
@@ -127,8 +170,9 @@ public class GameManager : MonoBehaviour
         #endregion
     }
 
-    public void Lv2FirstTextPos()
+    private void Lv2FirstTextPos()
     {
+        Debug.Log("Lv2FirstTextPos");
         while (true)
         {
             Pos[0] = Random.Range(-6, 6);
@@ -146,47 +190,29 @@ public class GameManager : MonoBehaviour
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
         #endregion
     }
-    public void Lv3FirstTextPos()
+    private void Lv3FirstTextPos()
     {
-        while (true)
-        {
-            Pos[0] = Random.Range(-9, 9);
-            if (Pos[0] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv3FirstTextPos");
         #region
-        if (Pos[0] < 0)
-            Pos[0] = Pos[0] + 26;
+        Pos[0] = Random.Range(7, 19);
+        Debug.Log("밑쪽만 나옴");
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
         #endregion
     }
-    public void Lv4FirstTextPos()
+    private void Lv4FirstTextPos()
     {
-        while (true)
-        {
-            Pos[0] = Random.Range(-25, 25);
-            if (Pos[0] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv4FirstTextPos");
         #region
-        if (Pos[0] < 0)
-            Pos[0] = Pos[0] + 26;
+        Pos[0] = Random.Range(10, 16);
+        //Pos[0] = 0;
+        Debug.Log("밑쪽만 나옴");
         firstCode[Pos[0]].text = "" + (int)codeNum[0];
         #endregion
     }
-    /*
-    public void Lv1SecondTextPos()
+    
+    private void Lv1SecondTextPos()
     {
+        Debug.Log("Lv1SecondTextPos");
         while (true)
         {
             Pos[1] = Random.Range(-3, 3);
@@ -203,9 +229,10 @@ public class GameManager : MonoBehaviour
             Pos[1] = Pos[1] + 22;
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
-    }*/
-    public void Lv2SecondTextPos()
+    }
+    private void Lv2SecondTextPos()
     {
+        Debug.Log("Lv2SecondTextPos");
         while (true)
         {
             Pos[1] = Random.Range(-5, 5);
@@ -223,46 +250,27 @@ public class GameManager : MonoBehaviour
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
     }
-    public void Lv3SecondTextPos()
+    private void Lv3SecondTextPos()
     {
-        while (true)
-        {
-            Pos[1] = Random.Range(-8, 8);
-            if (Pos[1] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv3SecondTextPos");
         #region
-        if (Pos[1] < 0)
-            Pos[1] = Pos[1] + 22;
+        Pos[1] = Random.Range(6, 12);
+        Debug.Log("밑쪽만 나옴");
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
     }
-    public void Lv4SecondTextPos()
+    private void Lv4SecondTextPos()
     {
-        while (true)
-        {
-            Pos[1] = Random.Range(-21, 21);
-            if (Pos[1] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv4SecondTextPos");
         #region
-        if (Pos[1] < 0)
-            Pos[1] = Pos[1] + 22;
+        Pos[1] = Random.Range(8, 15);
+        Debug.Log("밑쪽만 나옴");
         secondCode[Pos[1]].text = "" + (int)codeNum[1];
         #endregion
     }
-    public void Lv1ThirdTextPos()
+    private void Lv1ThirdTextPos()
     {
+        Debug.Log("Lv1ThirdTextPos");
         while (true)
         {
             Pos[2] = Random.Range(-2, 2);
@@ -280,8 +288,9 @@ public class GameManager : MonoBehaviour
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
         #endregion
     }
-    public void Lv2ThirdTextPos()
+    private void Lv2ThirdTextPos()
     {
+        Debug.Log("Lv2ThirdTextPos");
         while (true)
         {
             Pos[2] = Random.Range(-3, 3);
@@ -299,46 +308,27 @@ public class GameManager : MonoBehaviour
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
         #endregion
     }
-    public void Lv3ThirdTextPos()
+    private void Lv3ThirdTextPos()
     {
-        while (true)
-        {
-            Pos[2] = Random.Range(-5, 5);
-            if (Pos[2] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv3ThirdTextPos");
         #region
-        if (Pos[2] < 0)
-            Pos[2] = Pos[2] + 15;
+        Pos[2] = Random.Range(4, 11);
+        Debug.Log("밑쪽만 나옴");
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
         #endregion
     }
-    public void Lv4ThirdTextPos()
+    private void Lv4ThirdTextPos()
     {
-        while (true)
-        {
-            Pos[2] = Random.Range(-14, 14);
-            if (Pos[2] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv4ThirdTextPos");
         #region
-        if (Pos[2] < 0)
-            Pos[2] = Pos[2] + 15;
+        Pos[2] = Random.Range(6, 9);
+        Debug.Log("밑쪽만 나옴");
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
         #endregion
     }
-    public void Lv1and2FourthTextPos()
+    private void Lv1and2FourthTextPos()
     {
+        Debug.Log("Lv1and2FourthTextPos");
         while (true)
         {
             Pos[3] = Random.Range(-1, 1);
@@ -357,41 +347,21 @@ public class GameManager : MonoBehaviour
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
         #endregion
     }
-    public void Lv3FourthTextPos()
+    private void Lv3FourthTextPos()
     {
-        while (true)
-        {
-            Pos[3] = Random.Range(-2, 2);
-            if (Pos[3] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv3FourthTextPos");
         #region
-        if (Pos[3] < 0)
-            Pos[3] = Pos[3] + 8;
+        Pos[3] = Random.Range(2, 6);
+        Debug.Log("밑쪽만 나옴");
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
         #endregion
     }
-    public void Lv4FourthTextPos()
+    private void Lv4FourthTextPos()
     {
-        while (true)
-        {
-            Pos[3] = Random.Range(-7, 7);
-            if (Pos[3] == 0)
-            {
-                Debug.Log("0 다시 돌림");
-                continue;
-            }
-            else
-                break;
-        }
+        Debug.Log("Lv4FourthTextPos");
         #region
-        if (Pos[3] < 0)
-            Pos[3] = Pos[3] + 8;
+        Pos[3] = Random.Range(3,5);
+        Debug.Log("밑쪽만 나옴");
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
         #endregion
     }
@@ -402,7 +372,18 @@ public class GameManager : MonoBehaviour
         nowValue = (float)slider.value;
         sliderValue.text = "" + (float)slider.value;
 
-        if (nowValue - preValue > 0)
+        count++;
+        if (count < angle)
+        {
+            return;
+        }
+
+        if (count == angle)
+        {
+            count = 0;
+        }
+
+        if (nowValue - preValue >0)
         {
             if (fourthCheck == false)   //네번째 정답 못맞춤
             {
@@ -413,21 +394,26 @@ public class GameManager : MonoBehaviour
                     {
                         if (firstCheck == false)    //아무 비밀번호도 못 맞춤
                         {
+
+                            angle = 6;
                             firstMovePlus();
                         }
 
                         if (firstCheck == true)     //첫번째 비밀번호만 맞춤
                         {
+                            angle = 8;
                             secondMovePlus();
                         }
                     }
                     if (secondCheck == true)    //첫,두번째 비밀번호 맞춤
                     {
+                        angle = 12;
                         thirdMovePlus();
                     }
                 }
                 if (thirdCheck == true) //세번째 까지 맞춤
                 {
+                    angle = 22;
                     fourthMovePlus();
                 }
             }
@@ -443,21 +429,25 @@ public class GameManager : MonoBehaviour
                     {
                         if (firstCheck == false)    //아무 비밀번호도 못 맞춤
                         {
+                            angle = 6;
                             firstMoveMinus();
                         }
 
                         if (firstCheck == true)     //첫번째 비밀번호만 맞춤
                         {
+                            angle = 8;
                             secondMoveMinus();
                         }
                     }
                     if (secondCheck == true)    //첫,두번째 비밀번호 맞춤
                     {
+                        angle = 12;
                         thirdMoveMinus();
                     }
                 }
                 if (thirdCheck == true) //세번째 까지 맞춤
                 {
+                    angle = 22;
                     fourthMoveMinus();
                 }
             }
@@ -541,7 +531,7 @@ public class GameManager : MonoBehaviour
             Pos[2] = Pos[2] + 15;
         thirdCode[Pos[2]].text = "" + (int)codeNum[2];
     }
-    public void fourthMovePlus()
+    private void fourthMovePlus()
     {
         SoundManager.instance.Tick();
         fourthCode[Pos[3]].text = " ";
@@ -551,7 +541,7 @@ public class GameManager : MonoBehaviour
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
     }
 
-    public void fourthMoveMinus()
+    private void fourthMoveMinus()
     {
         SoundManager.instance.Tick();
         fourthCode[Pos[3]].text = " ";
@@ -561,7 +551,7 @@ public class GameManager : MonoBehaviour
         fourthCode[Pos[3]].text = "" + (int)codeNum[3];
     }
 
-    public void CheckFirst()
+    private void CheckFirst()
     {
         int NowNum = 0;
         string s = firstCode[0].text;
@@ -574,13 +564,15 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.Success();
             arrow[0].SetActive(false);
             arrow[1].SetActive(true);
-            if (level == 2)
+            if (startLv == 1)
+                Lv1SecondTextPos();
+            if (startLv == 2)
                 Lv2SecondTextPos();
-            else if(level==3)
+            if (startLv == 3)
                 Lv3SecondTextPos();
-            else if (level == 4)
+            if (startLv == 4)
                 Lv4SecondTextPos();
-            slider.value = 50;
+            slider.value = 180;
         }
         if (NowNum != codeNum[0])
         {
@@ -591,7 +583,7 @@ public class GameManager : MonoBehaviour
             Invoke("del_red", 1.5f);
         }
     }
-    public void CheckSecond()
+    private void CheckSecond()
     {
         int NowNum2 = 0;
         string s2 = secondCode[0].text;
@@ -603,16 +595,15 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.Success();
             arrow[1].SetActive(false);
             arrow[2].SetActive(true);
-            if (level == 1)
+            if (startLv == 1)
                 Lv1ThirdTextPos();
-            else if (level == 2)
-                Lv2ThirdTextPos();          
-            else if (level == 3)
-                Lv3ThirdTextPos();          
-            else if (level == 4)
-                Lv4ThirdTextPos();        
-            slider.value = 50;
-
+            if (startLv == 2)
+                Lv2ThirdTextPos();
+            if (startLv == 3)
+                Lv3ThirdTextPos();
+            if (startLv == 4)
+                Lv4ThirdTextPos();
+            slider.value = 180;
         }
         if (NowNum2 != codeNum[1])
         {
@@ -623,7 +614,7 @@ public class GameManager : MonoBehaviour
             Invoke("del_red", 1.5f);
         }
     }
-    public void CheckThird()
+    private void CheckThird()
     {
         int NowNum3 = 0;
         string s3 = thirdCode[0].text;
@@ -635,15 +626,13 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.Success();
             arrow[2].SetActive(false);
             arrow[3].SetActive(true) ;
-            if(level==1)
+            if ((startLv == 1)||(startLv == 2))
                 Lv1and2FourthTextPos();
-            else if(level==2)
-                Lv1and2FourthTextPos();
-            else if (level == 3)
+            if (startLv == 3)
                 Lv3FourthTextPos();
-            else if (level == 4)
+            if (startLv == 4)
                 Lv4FourthTextPos();
-            slider.value = 50;
+            slider.value = 180;
         }
         if (NowNum3 != codeNum[2])
         {
@@ -654,7 +643,7 @@ public class GameManager : MonoBehaviour
             Invoke("del_red", 1.5f);
         }
     }
-    public void CheckFourth()
+    private void CheckFourth()
     {
         int NowNum4 = 0;
         string s4 = fourthCode[0].text;
@@ -664,7 +653,7 @@ public class GameManager : MonoBehaviour
             fourthCheck = true;
             Debug.Log("네 번째 정답");
             SoundManager.instance.OpenDoor();
-            slider.value = 50;
+            slider.value = 180;
         }
         if (NowNum4 != codeNum[3])
         {
@@ -675,7 +664,7 @@ public class GameManager : MonoBehaviour
             Invoke("del_red", 1.5f);
         }
     }
-    public void GameSuccess()
+    private void GameSuccess()
     {
         if ((firstCheck == true) && (secondCheck == true) && (thirdCheck == true) && (fourthCheck == true))
         {
@@ -697,13 +686,12 @@ public class GameManager : MonoBehaviour
         }
 
     }
-    public void Clear()
+    private void Clear()
     {
         codeNum.Clear();
+        slider.value = 180;
 
-        slider.value = 50;
-
-        for(int i=0; i < firstCode.Length; i++)
+        for (int i=0; i < firstCode.Length; i++)
         {
             firstCode[i].text = " ";
         }
@@ -741,6 +729,7 @@ public class GameManager : MonoBehaviour
         clearPanel.SetActive(true);
         UIManager.instance.endTime();
         UIManager.instance.EndScore();
+        Fill_();
     }
 
     public void dialbuttonClick()
@@ -788,7 +777,6 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
     public void Ending()
     {
         clearPanel.SetActive(true);
@@ -800,5 +788,45 @@ public class GameManager : MonoBehaviour
     public void del_red()
     {
         redPanel.SetActive(false);
+    }
+    public void startLv1()
+    {
+        SoundManager.instance.menu_Click();
+        startLv = 1;
+    }
+    public void startLv2()
+    {
+        SoundManager.instance.menu_Click();
+        startLv = 2;
+    }
+    public void startLv3()
+    {
+        SoundManager.instance.menu_Click();
+        startLv = 3;
+    }
+    public void startLv4()
+    {
+        SoundManager.instance.menu_Click();
+        startLv = 4;
+    }
+    public void del_choice()
+    {
+        chose_level.SetActive(false);
+    }
+    public void Slider_minmax()
+    {
+        if (slider.value < SliderMinValue)
+            SliderMinValue = slider.value;
+        if (slider.value > SliderMaxValue)
+            SliderMaxValue = slider.value;
+    }
+    public void Fill_()
+    {
+        num1 = (float)((GameManager.instance.SliderMaxValue - GameManager.instance.SliderMinValue) * ((double)1 / (double)360));
+        origin.transform.GetComponent<Image>().fillAmount = num1;
+        Debug.Log(num1);
+
+        float Rotate = (float)((180 - GameManager.instance.SliderMinValue));
+        origin.transform.rotation = Quaternion.Euler(0, 0, Mathf.Abs(Rotate)); // Mathf.Abs : 절대값
     }
 }

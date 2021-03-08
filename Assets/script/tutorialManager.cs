@@ -9,6 +9,7 @@ public class tutorialManager : MonoBehaviour
     #region 
     public Text CodeText;
     private List<int> codeNum = new List<int>();
+    private List<int> ShowCode = new List<int>();
     private int randNum;
     private string line;
     public Text[] firstCode;
@@ -40,17 +41,21 @@ public class tutorialManager : MonoBehaviour
     void Start()
     {
         Time.timeScale = 0f;
-
+        firstCheck = true;
+        secondCheck = true;
         //StartCoroutine("DestroyExplain");
         for (int i = 0; i < 5; i++)
         {
             randNum = Random.Range(0, 99);
             codeNum.Add(randNum);
+            ShowCode.Add(randNum);
         }
-        line = string.Join(" ", codeNum.ToArray());
-        CodeText.text = "암호 : " + line;
-        FirstTextPos();
 
+        ShowCode.RemoveRange(0, 2);
+
+        line = string.Join(" ", ShowCode.ToArray());
+        CodeText.text = "암호 : " + line;
+        ThirdTextPos();
         LastText.text = "" + (int)codeNum[4];
     }
 
@@ -58,12 +63,6 @@ public class tutorialManager : MonoBehaviour
     {
         suc_scene();
     }
-
-    /*IEnumerator DestroyExplain()
-    {
-        yield return new WaitForSeconds(2.0f);
-        explainPanel.SetActive(false);
-    }*/
 
     public void FirstTextPos()
     {
@@ -121,7 +120,7 @@ public class tutorialManager : MonoBehaviour
         preValue = nowValue;
         nowValue = (float)slider.value;
         sliderValue.text = "" + (float)slider.value;
-        if (nowValue - preValue > 0) //(50 <= slider.value) && (slider.value <= 100)
+        if (nowValue - preValue > 0) 
         {
             if (fourthCheck == false)   //네번째 정답 못맞춤
             {
@@ -338,6 +337,7 @@ public class tutorialManager : MonoBehaviour
 
     }
 
+    
     public void CheckFirst()
     {
         int NowNum = 0;
@@ -349,8 +349,8 @@ public class tutorialManager : MonoBehaviour
             Debug.Log("첫 번째 정답");
             SoundManager.instance.Success();
             SecondTextPos();
-            Arrow[0].SetActive(false);
-            Arrow[1].SetActive(true);
+            //Arrow[0].SetActive(false);
+            //Arrow[1].SetActive(true);
             slider.value = 50;
         }
         if (NowNum != codeNum[0])
@@ -362,7 +362,9 @@ public class tutorialManager : MonoBehaviour
             Invoke("DestroyTry", 2);
         }
     }
+    
 
+   
     public void CheckSecond()
     {
         int NowNum2 = 0;
@@ -374,8 +376,8 @@ public class tutorialManager : MonoBehaviour
             Debug.Log("두 번째 정답");
             SoundManager.instance.Success();
             ThirdTextPos();
-            Arrow[1].SetActive(false);
-            Arrow[2].SetActive(true);
+            //Arrow[1].SetActive(false);
+            //Arrow[2].SetActive(true);
             slider.value = 50;
         }
         if (NowNum2 != codeNum[1])
@@ -387,7 +389,7 @@ public class tutorialManager : MonoBehaviour
             Invoke("DestroyTry", 2);
         }
     }
-
+    
     public void CheckThird()
     {
         int NowNum3 = 0;
@@ -399,8 +401,8 @@ public class tutorialManager : MonoBehaviour
             Debug.Log("세 번째 정답");
             SoundManager.instance.Success();
             FourthTextPos();
-            Arrow[2].SetActive(false);
-            Arrow[3].SetActive(true);
+            //Arrow[2].SetActive(false);
+            //Arrow[3].SetActive(true);
             slider.value = 50;
         }
         if (NowNum3 != codeNum[2])
