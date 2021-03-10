@@ -86,12 +86,6 @@ public class UIManager : MonoBehaviour
 
     public void EndScore()  //게임 모두 끝났을 때 시간 당 점수 추가, 디비 입력
     {
-        if (total <= 25)
-            gameScore += 100;
-        if ((total > 25) && (total <=35))
-            gameScore += 50;
-        if (total > 35)
-            gameScore += 30;
         endScore.text = "점수 : " + gameScore+"점";
 
         float playtime_REAL = (float)(Math.Truncate(total * 100) / 100);
