@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     #region
     private int startLv ;
-    private int level = 1;
+    public int level = 1;
     public Text CodeText;
     private List<int> codeNum = new List<int>();
     private List<int> ShowCode = new List<int>();
@@ -677,6 +677,7 @@ public class GameManager : MonoBehaviour
             }
             if (level == 4)
             {
+                UIManager.instance.printTime();
                 scene[4].SetActive(true);
                 Time.timeScale = 1f;
                 Invoke("ending", 1.5f);

@@ -67,14 +67,29 @@ public class UIManager : MonoBehaviour
         {
             resultTimeText.text = "소요 시간 : " + (System.Math.Truncate(GameTime * 100) / 100) + "초";
         }
-        if (GameTime <= 10)
-            gameScore += 100;
-        if ((GameTime > 10) && (GameTime <= 15))
-            gameScore += 70;
-        if ((GameTime>15) && (GameTime <= 20))
-            gameScore += 50;
-        if (GameTime>20)
-            gameScore += 30;
+        if ((GameManager.instance.level == 1)||(GameManager.instance.level==2))
+        {
+            if (GameTime <= 5)
+                gameScore += 100;
+            if ((GameTime > 5) && (GameTime <= 15))
+                gameScore += 60;
+            if ((GameTime > 15) && (GameTime <= 20))
+                gameScore += 30;
+            if (GameTime > 20)
+                gameScore += 5;
+        }
+        if ((GameManager.instance.level == 3)||(GameManager.instance.level==4))
+        {
+            if (GameTime <= 10)
+                gameScore += 100;
+            if ((GameTime > 10) && (GameTime <= 15))
+                gameScore += 60;
+            if ((GameTime > 15) && (GameTime <= 25))
+                gameScore += 40;
+            if (GameTime > 25)
+                gameScore += 10;
+        }
+
         scoreText.text = "점수 : " + gameScore + "점";
     }
 
