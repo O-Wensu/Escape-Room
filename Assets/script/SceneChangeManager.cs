@@ -17,19 +17,19 @@ public class SceneChangeManager : MonoBehaviour
     public void MainMenu() 
     {
         SoundManager.instance.menu_Click();
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("MainScene");
     }
 
     public void GameStart() 
     {
         SoundManager.instance.menu_Click();
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("dialScene");
     }
 
     public void Tutorial() 
     {
         SoundManager.instance.menu_Click();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("tutorialScene");
     }
     public void GameQuit()
     {

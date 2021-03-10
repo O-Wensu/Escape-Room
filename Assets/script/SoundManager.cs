@@ -42,6 +42,9 @@ public class SoundManager : MonoBehaviour
 
     void Start()
     {
+        //btn2는 효과음 backVSlider1으로 조절 myAudio1
+        //btn은 배경음 backVSlider2로 조절 myAudio2
+
         btn.GetComponent<Image>().sprite = OnSprite1;
         btn2.GetComponent<Image>().sprite = OnSprite2;
         //myAudio = GetComponent<AudioSource>();
@@ -49,7 +52,7 @@ public class SoundManager : MonoBehaviour
             check = false;
         else
             check = true;
-
+        
         backvol = PlayerPrefs.GetFloat("backvol", 0.5f);
         backVSlider2.value = backvol;
         myAudio2.volume = backVSlider2.value;
@@ -60,7 +63,6 @@ public class SoundManager : MonoBehaviour
         {
             myAudio1[i].volume = backVSlider1.value;
         }
-        //DontDestroyOnLoad(gameObject);
     }
     private void Update()
     {
@@ -71,6 +73,7 @@ public class SoundManager : MonoBehaviour
         }
         else
             return;
+        ZeroSound();
     }
 
     public void soundslider()
@@ -115,7 +118,7 @@ public class SoundManager : MonoBehaviour
     {
         myAudio1[4].PlayOneShot(tick_sound);
     }
-    public void no_backsound()
+    public void no_backsound()//배경음
     {
         if (myAudio2.volume == 0)
         {
@@ -130,7 +133,7 @@ public class SoundManager : MonoBehaviour
             backVSlider2.value = 0;
         }
     }
-    public void no_backsound2()
+    public void no_backsound2()//효과음
     {
         for (int i = 0; i < 4; i++)
         {
@@ -148,8 +151,15 @@ public class SoundManager : MonoBehaviour
             }
         }
     }
-    /*public void Ds_backsound()
+    public void ZeroSound()
     {
-        Destroy(Aaudio);
-    }*/
+        if(backVSlider2.value == 0)
+            btn.GetComponent<Image>().sprite = OffSprite1;
+        if (backVSlider2.value>0)
+            btn.GetComponent<Image>().sprite = OnSprite1;
+        if (backVSlider1.value==0)
+            btn2.GetComponent<Image>().sprite = OffSprite2;
+        if(backVSlider1.value>0)
+            btn2.GetComponent<Image>().sprite = OnSprite2;
+    }
 }

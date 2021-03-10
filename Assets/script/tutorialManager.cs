@@ -31,10 +31,11 @@ public class tutorialManager : MonoBehaviour
     public GameObject retryPanel;
     public GameObject explainPanel;
     public GameObject whitePanel;
-    private int i = 0;
+    public int i = 0;
     public GameObject _key;
     public GameObject[] Arrow;
     public GameObject tutoScene;
+    private int count;
     #endregion
 
     // Start is called before the first frame update
@@ -120,6 +121,17 @@ public class tutorialManager : MonoBehaviour
         preValue = nowValue;
         nowValue = (float)slider.value;
         sliderValue.text = "" + (float)slider.value;
+
+        count++;
+        if (count < 5)
+        {
+            return;
+        }
+
+        if (count == 5)
+        {
+            count = 0;
+        }
         if (nowValue - preValue > 0) 
         {
             if (fourthCheck == false)   //네번째 정답 못맞춤
@@ -475,7 +487,7 @@ public class tutorialManager : MonoBehaviour
         }
         else if (i==3)
         {
-            explains[i - 1].SetActive(false);
+            explains[i -1].SetActive(false);
             explains[i].SetActive(true);
             i++;
         }
@@ -490,13 +502,7 @@ public class tutorialManager : MonoBehaviour
                 explains[i].SetActive(false);
             }
     }
-    public void stopCount()
-    {
-        if (i == 2)
-            i = 3;
-        else
-            i = -1;
-    }
+
     public void Des_explain()
     {
         for(int i=0; i<5; i++)
@@ -504,6 +510,13 @@ public class tutorialManager : MonoBehaviour
             explains[i].SetActive(false);
         }
         whitePanel.SetActive(false);
+    }
+    public void stopCount()
+    {
+        if (i == 2)
+            i = 3;
+        else
+            i = -1;
     }
 
     public void del_tuto()

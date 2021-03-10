@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
     public Text endScore;
     private int gameScore = 0;
 
+    //싱글톤
     public static UIManager instance;
     void Awake()
     {
@@ -29,7 +30,7 @@ public class UIManager : MonoBehaviour
     {
         startTime = 0f;
     }
-    void Update()
+    void Update()   //시간 출력 소수 둘째자리까지
     {
         GameTime = GameTime + Time.deltaTime;
         if (GameTime < 10)
@@ -40,20 +41,20 @@ public class UIManager : MonoBehaviour
         else
             GameTimeText.text = "시간 : " + (System.Math.Truncate(GameTime * 100) / 100);
     }
-    public void GamePause()
+    public void GamePause() //게임 일시정지
     {
         stopPanel.SetActive(true);
         Time.timeScale = 0f;
     }
 
-    public void Restart()
+    public void Restart()   //게임 계속하기
     {
         SoundManager.instance.menu_Click();
         stopPanel.SetActive(false);
         Time.timeScale = 1f;
     }
 
-    public void printTime()
+    public void printTime() //라운드 끝나면 소요시간 출력, 점수 입력
     {
         Time.timeScale = 0f;
         total = total + (float)GameTime;
@@ -83,7 +84,7 @@ public class UIManager : MonoBehaviour
         endTimeText.text = "게임시간 : " + (System.Math.Truncate(total * 100) / 100) + "초";
     }
 
-    public void EndScore()
+    public void EndScore()  //게임 모두 끝났을 때 시간 당 점수 추가, 디비 입력
     {
         if (total <= 25)
             gameScore += 100;
@@ -106,11 +107,11 @@ public class UIManager : MonoBehaviour
         sqlite.Instance.DatabaseSQLAdd(sql);
     }
 
-    public void setZero()
+    public void setZero()   //게임 시간 0으로 초기화
     {
         GameTime = startTime;
     }
-    public void Restartbtn()
+    public void Restartbtn()    //재시작 버튼
     {
         SceneChangeManager.instance.GameStart();
         stopPanel.SetActive(false);
