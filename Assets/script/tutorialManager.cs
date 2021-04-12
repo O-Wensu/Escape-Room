@@ -455,7 +455,7 @@ public class tutorialManager : MonoBehaviour
         {
             Time.timeScale = 0f;
             resultPanel.SetActive(true);
-            UIManager.instance.printTime();
+            UIManager.instance.printTuToTime();
 
         }
 
